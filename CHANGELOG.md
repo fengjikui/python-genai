@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.1](https://github.com/googleapis/python-genai/compare/v2.9.0...v2.9.1) (2026-06-22)
+
+
+### Documentation
+
+* Fix typos across docstrings ([63ec5bb](https://github.com/googleapis/python-genai/commit/63ec5bb175869624801aef587415fe246f6618af))
+
 ## [2.9.0](https://github.com/googleapis/python-genai/compare/v2.9.0-rc1...v2.9.0) (2026-06-19)
 
 ### Major updates
