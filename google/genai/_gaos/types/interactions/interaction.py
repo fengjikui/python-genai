@@ -29,12 +29,12 @@ from .dynamicagentconfig import DynamicAgentConfig, DynamicAgentConfigParam
 from .environment import Environment, EnvironmentParam
 from .generationconfig import GenerationConfig, GenerationConfigParam
 from .imagecontent import ImageContent, ImageContentParam
-from .interactionsinput import InteractionsInput, InteractionsInputParam
+from .interactionsinput import InteractionsInput, InteractionsInputTypedDict
 from .model import Model
 from .responseformat import ResponseFormat, ResponseFormatParam
 from .responsemodality import ResponseModality
 from .servicetier import ServiceTier
-from .step import Step, StepParam
+from .step import Step, StepTypedDict
 from .tool import Tool, ToolParam
 from .usage import Usage, UsageTypedDict
 from .videocontent import VideoContent, VideoContentParam
@@ -167,7 +167,7 @@ class InteractionTypedDict(TypedDict):
     service_tier: NotRequired[ServiceTier]
     webhook_config: NotRequired[WebhookConfigParam]
     r"""Message for configuring webhook events for a request."""
-    steps: NotRequired[List[StepParam]]
+    steps: NotRequired[List[StepTypedDict]]
     r"""Output only. The steps that make up the interaction, when included in the response."""
     response_format: NotRequired[InteractionResponseFormatTypedDict]
     r"""Enforces that the generated response is a JSON object that complies with the JSON schema specified in this field."""
@@ -184,7 +184,7 @@ class InteractionTypedDict(TypedDict):
     """
     agent_config: NotRequired[InteractionAgentConfigTypedDict]
     r"""Configuration parameters for the agent interaction."""
-    input: NotRequired[InteractionsInputParam]
+    input: NotRequired[InteractionsInputTypedDict]
     r"""The input for the interaction."""
     output_text: NotRequired[str]
     r"""Concatenated text from the last model output in response to the current request.

@@ -18,41 +18,29 @@
 
 from __future__ import annotations
 from .. import BaseModel, UNSET_SENTINEL
-from ...utils import validate_const
-from .googlemapsresult import GoogleMapsResult, GoogleMapsResultTypedDict
-import pydantic
+from .googlemapsresultplaces import GoogleMapsResultPlaces, GoogleMapsResultPlacesParam
 from pydantic import model_serializer
-from pydantic.functional_validators import AfterValidator
-from typing import List, Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
-class GoogleMapsResultDeltaTypedDict(TypedDict):
-    type: Literal["google_maps_result"]
-    result: NotRequired[List[GoogleMapsResultTypedDict]]
-    r"""The results of the Google Maps."""
-    signature: NotRequired[str]
-    r"""A signature hash for backend validation."""
+class GoogleMapsResultInputParam(TypedDict):
+    r"""The result of the Google Maps."""
+
+    places: NotRequired[List[GoogleMapsResultPlacesParam]]
+    widget_context_token: NotRequired[str]
 
 
-class GoogleMapsResultDelta(BaseModel):
-    type: Annotated[
-        Annotated[
-            Literal["google_maps_result"],
-            AfterValidator(validate_const("google_maps_result")),
-        ],
-        pydantic.Field(alias="type"),
-    ] = "google_maps_result"
+class GoogleMapsResultInput(BaseModel):
+    r"""The result of the Google Maps."""
 
-    result: Optional[List[GoogleMapsResult]] = None
-    r"""The results of the Google Maps."""
+    places: Optional[List[GoogleMapsResultPlaces]] = None
 
-    signature: Optional[str] = None
-    r"""A signature hash for backend validation."""
+    widget_context_token: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["result", "signature"])
+        optional_fields = set(["places", "widget_context_token"])
         serialized = handler(self)
         m = {}
 
@@ -65,9 +53,3 @@ class GoogleMapsResultDelta(BaseModel):
                     m[k] = val
 
         return m
-
-
-try:
-    GoogleMapsResultDelta.model_rebuild()
-except NameError:
-    pass

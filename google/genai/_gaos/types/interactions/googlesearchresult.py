@@ -19,7 +19,7 @@
 from __future__ import annotations
 from .. import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -28,6 +28,8 @@ class GoogleSearchResultParam(TypedDict):
 
     search_suggestions: NotRequired[str]
     r"""Web content snippet that can be embedded in a web page or an app webview."""
+    search_queries: NotRequired[List[str]]
+    r"""This field is populated only when the grounding source is Google Search."""
 
 
 class GoogleSearchResult(BaseModel):
@@ -36,9 +38,12 @@ class GoogleSearchResult(BaseModel):
     search_suggestions: Optional[str] = None
     r"""Web content snippet that can be embedded in a web page or an app webview."""
 
+    search_queries: Optional[List[str]] = None
+    r"""This field is populated only when the grounding source is Google Search."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["search_suggestions"])
+        optional_fields = set(["search_suggestions", "search_queries"])
         serialized = handler(self)
         m = {}
 

@@ -25,7 +25,7 @@ from .deepresearchagentconfig import (
 )
 from .dynamicagentconfig import DynamicAgentConfig, DynamicAgentConfigParam
 from .environment import Environment, EnvironmentParam
-from .interactionsinput import InteractionsInput, InteractionsInputParam
+from .interactionsinput_input import InteractionsInputInput, InteractionsInputInputParam
 from .responseformat import ResponseFormat, ResponseFormatParam
 from .responsemodality import ResponseModality
 from .servicetier import ServiceTier
@@ -80,7 +80,7 @@ class CreateAgentInteractionParam(TypedDict):
 
     agent: AgentOption
     r"""The agent to interact with."""
-    input: InteractionsInputParam
+    input: InteractionsInputInputParam
     r"""The input for the interaction."""
     stream: NotRequired[bool]
     r"""Input only. Whether the interaction will be streamed."""
@@ -115,7 +115,7 @@ class CreateAgentInteraction(BaseModel):
     agent: AgentOption
     r"""The agent to interact with."""
 
-    input: InteractionsInput
+    input: InteractionsInputInput
     r"""The input for the interaction."""
 
     stream: Optional[bool] = None

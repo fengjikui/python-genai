@@ -19,6 +19,9 @@
 from .....types.interactions.googlemapsresultplaces import (
     GoogleMapsResultPlaces as Place,
 )
+from .....types.interactions.sourceflagginguri import (
+    SourceFlaggingURI as SourceFlaggingUris,
+)
 from . import place
 
-__all__ = ["Place", "place"]
+__all__ = ["Place", "SourceFlaggingUris", "place"]

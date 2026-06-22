@@ -18,41 +18,36 @@
 
 from __future__ import annotations
 from .. import BaseModel, UNSET_SENTINEL
-from ...utils import validate_const
-from .googlemapsresult import GoogleMapsResult, GoogleMapsResultTypedDict
-import pydantic
 from pydantic import model_serializer
-from pydantic.functional_validators import AfterValidator
-from typing import List, Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Optional
+from typing_extensions import NotRequired, TypedDict
 
 
-class GoogleMapsResultDeltaTypedDict(TypedDict):
-    type: Literal["google_maps_result"]
-    result: NotRequired[List[GoogleMapsResultTypedDict]]
-    r"""The results of the Google Maps."""
-    signature: NotRequired[str]
-    r"""A signature hash for backend validation."""
+class SourceFlaggingURITypedDict(TypedDict):
+    r"""A URI that can be used to flag a place or review for inappropriate
+    content. This is populated only when the grounding source is Google Maps.
+    """
+
+    source_id: NotRequired[str]
+    r"""The ID of the place or review."""
+    flag_content_uri: NotRequired[str]
+    r"""The URI that can be used to flag the content."""
 
 
-class GoogleMapsResultDelta(BaseModel):
-    type: Annotated[
-        Annotated[
-            Literal["google_maps_result"],
-            AfterValidator(validate_const("google_maps_result")),
-        ],
-        pydantic.Field(alias="type"),
-    ] = "google_maps_result"
+class SourceFlaggingURI(BaseModel):
+    r"""A URI that can be used to flag a place or review for inappropriate
+    content. This is populated only when the grounding source is Google Maps.
+    """
 
-    result: Optional[List[GoogleMapsResult]] = None
-    r"""The results of the Google Maps."""
+    source_id: Optional[str] = None
+    r"""The ID of the place or review."""
 
-    signature: Optional[str] = None
-    r"""A signature hash for backend validation."""
+    flag_content_uri: Optional[str] = None
+    r"""The URI that can be used to flag the content."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["result", "signature"])
+        optional_fields = set(["source_id", "flag_content_uri"])
         serialized = handler(self)
         m = {}
 
@@ -65,9 +60,3 @@ class GoogleMapsResultDelta(BaseModel):
                     m[k] = val
 
         return m
-
-
-try:
-    GoogleMapsResultDelta.model_rebuild()
-except NameError:
-    pass

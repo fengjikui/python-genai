@@ -19,7 +19,7 @@
 from __future__ import annotations
 from .. import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from .servicetier import ServiceTier
-from .step import Step, StepParam
+from .step import Step, StepTypedDict
 from .usage import Usage, UsageTypedDict
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
@@ -64,7 +64,7 @@ class InteractionSseEventInteractionTypedDict(TypedDict):
     service_tier: NotRequired[ServiceTier]
     usage: NotRequired[UsageTypedDict]
     r"""Statistics on the interaction request's token usage."""
-    steps: NotRequired[List[StepParam]]
+    steps: NotRequired[List[StepTypedDict]]
     r"""Output only. The steps that make up the interaction, if included in this event."""
 
 

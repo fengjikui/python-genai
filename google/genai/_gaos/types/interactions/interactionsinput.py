@@ -18,15 +18,15 @@
 
 from __future__ import annotations
 from .content import Content, ContentParam
-from .step import Step, StepParam
+from .step import Step, StepTypedDict
 from .turn import Turn, TurnParam
 from typing import List, Union
 from typing_extensions import TypeAliasType
 
 
-InteractionsInputParam = TypeAliasType(
-    "InteractionsInputParam",
-    Union[str, List[StepParam], List[ContentParam], List[TurnParam], ContentParam],
+InteractionsInputTypedDict = TypeAliasType(
+    "InteractionsInputTypedDict",
+    Union[str, List[StepTypedDict], List[ContentParam], List[TurnParam], ContentParam],
 )
 r"""The input for the interaction."""
 

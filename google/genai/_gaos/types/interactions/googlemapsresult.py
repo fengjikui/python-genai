@@ -19,16 +19,22 @@
 from __future__ import annotations
 from .. import BaseModel, UNSET_SENTINEL
 from .googlemapsresultplaces import GoogleMapsResultPlaces, GoogleMapsResultPlacesParam
+from .sourceflagginguri import SourceFlaggingURI, SourceFlaggingURITypedDict
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class GoogleMapsResultParam(TypedDict):
+class GoogleMapsResultTypedDict(TypedDict):
     r"""The result of the Google Maps."""
 
     places: NotRequired[List[GoogleMapsResultPlacesParam]]
     widget_context_token: NotRequired[str]
+    source_flagging_uris: NotRequired[List[SourceFlaggingURITypedDict]]
+    r"""Output only. A list of URIs that can be used to flag a place or review for
+    inappropriate content. This field is populated only when the grounding
+    source is Google Maps.
+    """
 
 
 class GoogleMapsResult(BaseModel):
@@ -38,9 +44,17 @@ class GoogleMapsResult(BaseModel):
 
     widget_context_token: Optional[str] = None
 
+    source_flagging_uris: Optional[List[SourceFlaggingURI]] = None
+    r"""Output only. A list of URIs that can be used to flag a place or review for
+    inappropriate content. This field is populated only when the grounding
+    source is Google Maps.
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["places", "widget_context_token"])
+        optional_fields = set(
+            ["places", "widget_context_token", "source_flagging_uris"]
+        )
         serialized = handler(self)
         m = {}
 

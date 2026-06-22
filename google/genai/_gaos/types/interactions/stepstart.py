@@ -19,7 +19,7 @@
 from __future__ import annotations
 from .. import BaseModel, UNSET_SENTINEL
 from ...utils import validate_const
-from .step import Step, StepParam
+from .step import Step, StepTypedDict
 from .streammetadata import StreamMetadata, StreamMetadataTypedDict
 import pydantic
 from pydantic import model_serializer
@@ -30,7 +30,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class StepStartTypedDict(TypedDict):
     index: int
-    step: StepParam
+    step: StepTypedDict
     r"""A step in the interaction."""
     event_type: Literal["step.start"]
     event_id: NotRequired[str]

@@ -154,7 +154,11 @@ if TYPE_CHECKING:
     )
     from .googlemapscalldelta import GoogleMapsCallDelta, GoogleMapsCallDeltaTypedDict
     from .googlemapscallstep import GoogleMapsCallStep, GoogleMapsCallStepParam
-    from .googlemapsresult import GoogleMapsResult, GoogleMapsResultParam
+    from .googlemapsresult import GoogleMapsResult, GoogleMapsResultTypedDict
+    from .googlemapsresult_input import (
+        GoogleMapsResultInput,
+        GoogleMapsResultInputParam,
+    )
     from .googlemapsresultdelta import (
         GoogleMapsResultDelta,
         GoogleMapsResultDeltaTypedDict,
@@ -163,7 +167,14 @@ if TYPE_CHECKING:
         GoogleMapsResultPlaces,
         GoogleMapsResultPlacesParam,
     )
-    from .googlemapsresultstep import GoogleMapsResultStep, GoogleMapsResultStepParam
+    from .googlemapsresultstep import (
+        GoogleMapsResultStep,
+        GoogleMapsResultStepTypedDict,
+    )
+    from .googlemapsresultstep_input import (
+        GoogleMapsResultStepInput,
+        GoogleMapsResultStepInputParam,
+    )
     from .googlesearch import GoogleSearch, GoogleSearchParam, GoogleSearchSearchType
     from .googlesearchcallarguments import (
         GoogleSearchCallArguments,
@@ -229,7 +240,11 @@ if TYPE_CHECKING:
         InteractionCreatedEvent,
         InteractionCreatedEventTypedDict,
     )
-    from .interactionsinput import InteractionsInput, InteractionsInputParam
+    from .interactionsinput import InteractionsInput, InteractionsInputTypedDict
+    from .interactionsinput_input import (
+        InteractionsInputInput,
+        InteractionsInputInputParam,
+    )
     from .interactionsseevent import (
         InteractionSSEEvent,
         InteractionSSEEventTypedDict,
@@ -290,8 +305,10 @@ if TYPE_CHECKING:
     from .reviewsnippet import ReviewSnippet, ReviewSnippetParam
     from .servicetier import ServiceTier
     from .source import Source, SourceParam, SourceType
+    from .sourceflagginguri import SourceFlaggingURI, SourceFlaggingURITypedDict
     from .speechconfig import SpeechConfig, SpeechConfigParam
-    from .step import Step, StepParam, UnknownStep
+    from .step import Step, StepTypedDict, UnknownStep
+    from .step_input import StepInput, StepInputParam
     from .stepdelta import StepDelta, StepDeltaTypedDict
     from .stepdeltadata import (
         StepDeltaData,
@@ -482,11 +499,15 @@ __all__ = [
     "GoogleMapsResult",
     "GoogleMapsResultDelta",
     "GoogleMapsResultDeltaTypedDict",
-    "GoogleMapsResultParam",
+    "GoogleMapsResultInput",
+    "GoogleMapsResultInputParam",
     "GoogleMapsResultPlaces",
     "GoogleMapsResultPlacesParam",
     "GoogleMapsResultStep",
-    "GoogleMapsResultStepParam",
+    "GoogleMapsResultStepInput",
+    "GoogleMapsResultStepInputParam",
+    "GoogleMapsResultStepTypedDict",
+    "GoogleMapsResultTypedDict",
     "GoogleSearch",
     "GoogleSearchCallArguments",
     "GoogleSearchCallArgumentsParam",
@@ -548,7 +569,9 @@ __all__ = [
     "InteractionStatusUpdateTypedDict",
     "InteractionTypedDict",
     "InteractionsInput",
-    "InteractionsInputParam",
+    "InteractionsInputInput",
+    "InteractionsInputInputParam",
+    "InteractionsInputTypedDict",
     "Language",
     "MCPServer",
     "MCPServerParam",
@@ -599,6 +622,8 @@ __all__ = [
     "ReviewSnippetParam",
     "ServiceTier",
     "Source",
+    "SourceFlaggingURI",
+    "SourceFlaggingURITypedDict",
     "SourceParam",
     "SourceType",
     "SpeechConfig",
@@ -610,11 +635,13 @@ __all__ = [
     "StepDeltaMetadata",
     "StepDeltaMetadataTypedDict",
     "StepDeltaTypedDict",
-    "StepParam",
+    "StepInput",
+    "StepInputParam",
     "StepStart",
     "StepStartTypedDict",
     "StepStop",
     "StepStopTypedDict",
+    "StepTypedDict",
     "StreamMetadata",
     "StreamMetadataTypedDict",
     "TextAnnotationDelta",
@@ -821,13 +848,17 @@ _dynamic_imports: dict[str, str] = {
     "GoogleMapsCallStep": ".googlemapscallstep",
     "GoogleMapsCallStepParam": ".googlemapscallstep",
     "GoogleMapsResult": ".googlemapsresult",
-    "GoogleMapsResultParam": ".googlemapsresult",
+    "GoogleMapsResultTypedDict": ".googlemapsresult",
+    "GoogleMapsResultInput": ".googlemapsresult_input",
+    "GoogleMapsResultInputParam": ".googlemapsresult_input",
     "GoogleMapsResultDelta": ".googlemapsresultdelta",
     "GoogleMapsResultDeltaTypedDict": ".googlemapsresultdelta",
     "GoogleMapsResultPlaces": ".googlemapsresultplaces",
     "GoogleMapsResultPlacesParam": ".googlemapsresultplaces",
     "GoogleMapsResultStep": ".googlemapsresultstep",
-    "GoogleMapsResultStepParam": ".googlemapsresultstep",
+    "GoogleMapsResultStepTypedDict": ".googlemapsresultstep",
+    "GoogleMapsResultStepInput": ".googlemapsresultstep_input",
+    "GoogleMapsResultStepInputParam": ".googlemapsresultstep_input",
     "GoogleSearch": ".googlesearch",
     "GoogleSearchParam": ".googlesearch",
     "GoogleSearchSearchType": ".googlesearch",
@@ -880,7 +911,9 @@ _dynamic_imports: dict[str, str] = {
     "InteractionCreatedEvent": ".interactioncreatedevent",
     "InteractionCreatedEventTypedDict": ".interactioncreatedevent",
     "InteractionsInput": ".interactionsinput",
-    "InteractionsInputParam": ".interactionsinput",
+    "InteractionsInputTypedDict": ".interactionsinput",
+    "InteractionsInputInput": ".interactionsinput_input",
+    "InteractionsInputInputParam": ".interactionsinput_input",
     "InteractionSSEEvent": ".interactionsseevent",
     "InteractionSSEEventTypedDict": ".interactionsseevent",
     "UnknownInteractionSSEEvent": ".interactionsseevent",
@@ -940,11 +973,15 @@ _dynamic_imports: dict[str, str] = {
     "Source": ".source",
     "SourceParam": ".source",
     "SourceType": ".source",
+    "SourceFlaggingURI": ".sourceflagginguri",
+    "SourceFlaggingURITypedDict": ".sourceflagginguri",
     "SpeechConfig": ".speechconfig",
     "SpeechConfigParam": ".speechconfig",
     "Step": ".step",
-    "StepParam": ".step",
+    "StepTypedDict": ".step",
     "UnknownStep": ".step",
+    "StepInput": ".step_input",
+    "StepInputParam": ".step_input",
     "StepDelta": ".stepdelta",
     "StepDeltaTypedDict": ".stepdelta",
     "StepDeltaData": ".stepdeltadata",

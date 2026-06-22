@@ -20,7 +20,7 @@ from __future__ import annotations
 from .. import BaseModel, UNSET_SENTINEL
 from .environment import Environment, EnvironmentParam
 from .generationconfig import GenerationConfig, GenerationConfigParam
-from .interactionsinput import InteractionsInput, InteractionsInputParam
+from .interactionsinput_input import InteractionsInputInput, InteractionsInputInputParam
 from .model import Model
 from .responseformat import ResponseFormat, ResponseFormatParam
 from .responsemodality import ResponseModality
@@ -63,7 +63,7 @@ class CreateModelInteractionParam(TypedDict):
 
     model: Model
     r"""The model that will complete your prompt.\n\nSee [models](https://ai.google.dev/gemini-api/docs/models) for additional details."""
-    input: InteractionsInputParam
+    input: InteractionsInputInputParam
     r"""The input for the interaction."""
     stream: NotRequired[bool]
     r"""Input only. Whether the interaction will be streamed."""
@@ -105,7 +105,7 @@ class CreateModelInteraction(BaseModel):
     model: Model
     r"""The model that will complete your prompt.\n\nSee [models](https://ai.google.dev/gemini-api/docs/models) for additional details."""
 
-    input: InteractionsInput
+    input: InteractionsInputInput
     r"""The input for the interaction."""
 
     stream: Optional[bool] = None
